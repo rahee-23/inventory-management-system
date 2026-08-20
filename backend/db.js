@@ -1,22 +1,17 @@
-const mysql = require("mysql2/promise");
+const { Pool } = require("pg");
 const dotenv = require("dotenv");
 const path = require("path");
 
-// Load the .env file from the backend folder
+// Load .env from the backend folder
 dotenv.config({
     path: path.join(__dirname, ".env")
 });
 
-console.log("Database user loaded:", process.env.DB_USER);
-
-const db = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
-module.exports = db;
+module.exports = pool;
