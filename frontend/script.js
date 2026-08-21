@@ -1,14 +1,12 @@
-const API_URL = "http://localhost:5000/api/products";
+//const API_URL = "http://localhost:5000/api/products";
+const API_URL = "https://inventory-management-api-zf8p.onrender.com/api/products";
 let products = [];
 
-// =========================
-// Load Products
-// =========================
 
+// Load Products
 async function loadProducts() {
     try {
         const response = await fetch(API_URL);
-
         if (!response.ok) {
             throw new Error("Failed to fetch products");
         }
@@ -29,10 +27,8 @@ async function loadProducts() {
     }
 }
 
-
-// =========================
 // Display Products
-// =========================
+
 
 function displayProducts(productList) {
     const tableBody = document.getElementById("productTableBody");
